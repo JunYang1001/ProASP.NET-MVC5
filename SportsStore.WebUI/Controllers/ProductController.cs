@@ -17,19 +17,52 @@ namespace SportsStore.WebUI.Controllers
             this.respository = productsRespository;
         }
         // GET: Product
-        public ActionResult List(int page=1)
+        public ActionResult List(string category, int page=1)
         {
-            ProductsListViewModel model = new ProductsListViewModel
+            if (category != null)
             {
-                Products = respository.Products.OrderBy(p => p.ProductID).Skip((page - 1) * PageSize).Take(PageSize),
-                PagingInfo = new PagingInfo
+                ProductsListViewModel model = new ProductsListViewModel
                 {
-                    CurrentPage = page,
-                    ItemsPerPage = PageSize,
-                    TotalItems = respository.Products.Count()
-                }
-            };
-            return View(model); 
+
+                    Products = respository.Products
+               .Where(p =>  p.Category == category)
+               .OrderBy(p => p.ProductID)
+               .Skip((page - 1) * PageSize)
+               .Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = category == null ?
+                   respository.Products.Count() : respository.Products.Where(e => e.Category == category).Count()
+                    },
+                    CurrnetCategory = category
+                };
+                return View(model);
+            }
+            else {
+                ProductsListViewModel model = new ProductsListViewModel
+                {
+
+                    Products = respository.Products
+                             
+                              .OrderBy(p => p.ProductID)
+                              .Skip((page - 1) * PageSize)
+                              .Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = category == null ?
+                                  respository.Products.Count() : respository.Products.Where(e => e.Category == category).Count()
+                    },
+                    CurrnetCategory = category
+                };
+                return View(model);
+            }
+               
+           
+           
         }
     }
 }

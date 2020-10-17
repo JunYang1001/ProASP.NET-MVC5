@@ -25,10 +25,10 @@ namespace SportsStore.WebUI.Controllers
                 {
 
                     Products = respository.Products
-               .Where(p =>  p.Category == category)
-               .OrderBy(p => p.ProductID)
-               .Skip((page - 1) * PageSize)
-               .Take(PageSize),
+                   .Where(p =>  p.Category == category)
+                   .OrderBy(p => p.ProductID)
+                   .Skip((page - 1) * PageSize)
+                   .Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
@@ -60,9 +60,7 @@ namespace SportsStore.WebUI.Controllers
                 };
                 return View(model);
             }
-               
-           
-           
+ 
         }
     }
 }

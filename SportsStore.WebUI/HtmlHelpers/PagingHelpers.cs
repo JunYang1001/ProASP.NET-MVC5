@@ -19,7 +19,7 @@ namespace SportsStore.WebUI.HtmlHelpers
                 tag.MergeAttribute("href", pageUrl(i));
                 tag.InnerHtml = i.ToString();
                 if (i == pagingInfo.CurrentPage)
-                {
+                { 
                     tag.AddCssClass("selected");
                     tag.AddCssClass("btn-primary");
 

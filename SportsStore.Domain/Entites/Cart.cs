@@ -18,9 +18,9 @@ namespace SportsStore.Domain.Entites
             if (line == null)
             {
                 lineCollection.Add(new CartLine { Product = product, Quantity = quantity });
-                
             }
-            else { line.Quantity += quantity; 
+            else { 
+                line.Quantity += quantity; 
             }
         }
 
